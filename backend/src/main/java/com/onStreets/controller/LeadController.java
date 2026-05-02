@@ -16,6 +16,8 @@ import com.onStreets.dto.LeadDTO;
 import com.onStreets.entity.Lead;
 import com.onStreets.service.LeadService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/leads")
 @CrossOrigin(origins = "*")
@@ -24,7 +26,7 @@ public class LeadController {
 	public LeadService leadService;
 	
 	@PostMapping
-	public ResponseEntity<Lead> createLead(@RequestBody LeadDTO dto) {
+	public ResponseEntity<Lead> createLead(@Valid @RequestBody LeadDTO dto) {
 	    return new ResponseEntity<>(leadService.saveLead(dto), HttpStatus.OK);
 	}
 	

@@ -14,6 +14,9 @@ import com.onStreets.repository.LeadRepository;
 public class LeadService {
 	@Autowired
 	public LeadRepository leadRepository;
+	
+	@Autowired
+	private EmailService emailService;
 
 	public Lead saveLead(LeadDTO dto) {
 		
@@ -24,7 +27,17 @@ public class LeadService {
 		toStore.setPhone(dto.getPhone());
 		toStore.setMessage(dto.getMessage());
 		toStore.setCreatedAt(LocalDateTime.now());
-		return leadRepository.save(toStore);
+		Lead saved = leadRepository.save(toStore);
+		String content = "New Lead:\n"
+	            + "Name: " + saved.getName() + "\n"
+	            + "Email: " + saved.getEmail() + "\n"
+	            + "Phone: " + saved.getPhone() + "\n"
+	            + "Message: " + saved.getMessage();
+		
+		emailService.sendLeadEmail("karthik.chirukuri2005@gmail.com", content);
+		
+		return saved;
+		
 	}
 	
 	public List<LeadDTO> getAllLeads() {

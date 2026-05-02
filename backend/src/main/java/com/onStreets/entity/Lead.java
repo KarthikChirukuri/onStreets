@@ -2,7 +2,6 @@ package com.onStreets.entity;
 
 import java.time.LocalDateTime;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,11 +17,16 @@ public class Lead {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//	 @NotBlank(message = "Name is required")
     private String name;
+	 
+//	 @Email(message = "Invalid email")
     private String email;
+	 
+//	@NotBlank(message = "Phone is required")
     private String phone;
 
-    @Column(length = 1000)
+//    @Column(length = 1000)
     private String message;
 
     private LocalDateTime createdAt;
